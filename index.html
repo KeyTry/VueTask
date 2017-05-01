@@ -1,47 +1,52 @@
 <html>
-    <head>
-        <title>VUE</title>
-    </head>
-    <body>
-       
-        <div id="app">
-            <div class="box">
-                <h3 class="title">All Tasks</h3>
-                <ul id="tasks">
-                    <li v-on:click="checkTask($event)" v-for="task in pendingTasks" v-bind:id="task.id">{{ task.description }} <span class="tag" v-bind:class="task.style">{{ task.priority }}</span></li>
-                </ul>
-            </div>
-            
-            <div class="box">
-                <h3 class="title">Completed</h3>
-                <ul id="completed">
-                    <li v-on:click="checkTask($event)" v-for="task in completedTasks" v-bind:id="task.id">{{ task.description }}</li>
-                </ul>
-            </div>
-            
-            <div class="box">
-                <h3 class="title">Add New Task</h3>
-                <input class="input" id="add-task" type="text" v-model="newTask">
-                <div id="select-priority">
-                    
-                    <label>
-                        <input v-on:click="selectPriority($event)" type="radio" value="Low" name="options" id="option1" checked data-priority="success"> Low
-                    </label>
-                    <label>
-                        <input v-on:click="selectPriority($event)" type="radio" value="Medium" name="options" id="option2" data-priority="warning"> Medium
-                    </label>
-                    <label>
-                        <input v-on:click="selectPriority($event)" type="radio" value="High" name="options" id="option3" data-priority="danger"> High
-                    </label>
-                    
-                </div>
-                <button class="button is-primary is-medium is-outlined" v-on:click="addTask">Add Task</button>
-            
-            </div>
-            
+
+<head>
+    <title>VUE</title>
+    <link rel="stylesheet" href="css/master.css">
+</head>
+
+<body>
+    <div id="app">
+        <div id="error-box">
+
         </div>
-       
-        <script src="js/vue.js"></script>
-        <script src="js/app.js"></script>
-    </body>
+
+        <div class="box" id="add-box">
+            <h3 class="title">New Task</h3>
+            <input class="input" id="add-task" type="text" v-model="newTask">
+            <div id="select-priority">
+                <label>
+                    <input v-on:click="selectPriority($event)" type="radio" value="Low" name="options" id="option1" data-priority="success"> <span id="option-low"><b>Low</b></span>
+                </label>
+                <label>
+                    <input v-on:click="selectPriority($event)" type="radio" value="Medium" name="options" id="option2" data-priority="warning"> <span id="option-medium"><b>Medium</b></span>
+                </label>
+                <label>
+                    <input v-on:click="selectPriority($event)" type="radio" value="High" name="options" id="option3" data-priority="danger"> <span id="option-high"><b>High</b></span>
+                </label>
+            </div>
+            <br>
+            <button class="button is-primary is-medium is-outlined" v-on:click="addTask">Add Task</button>
+        </div>
+        <hr>
+        <div class="box" id="pending-box">
+            <h3 class="title">Pending</h3>
+            <ul id="tasks">
+                <li v-on:click="checkTask($event)" v-for="task in pendingTasks" v-bind:id="task.id" v-bind:style="task.priorityStyle">{{ task.description }} <span> : </span> <span class="tag" v-bind:class="task.style">{{ task.priority }}</span></li>
+            </ul>
+        </div>
+        <hr>
+        <div class="box" id="completed-box">
+            <h3 class="title">Completed</h3>
+            <ul id="completed">
+                <li v-on:click="checkTask($event)" v-for="task in completedTasks" v-bind:id="task.id">{{ task.description }}</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <script src="js/vue.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
 </html>
